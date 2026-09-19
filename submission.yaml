@@ -96,7 +96,7 @@ submission:
 
   demo_video: "https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi"
   live_demo: "NOT DEPLOYED — run locally via docker compose + npm run dev (see docs/setup-guide.md)"
-  presentation: "presentation/slides-outline.md (slides.pdf to be added manually)"
+  presentation: "presentation/slides.pptx"
   screenshots:
     - "demo/screenshots/01-home-landing-page.png"
     - "demo/screenshots/02-super-admin-dashboard.png"

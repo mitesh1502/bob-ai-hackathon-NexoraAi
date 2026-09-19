@@ -147,8 +147,7 @@ Response:
 
 ### 📊 Presentation
 
-Slide deck outline: [`presentation/slides-outline.md`](presentation/slides-outline.md)
-> Add `presentation/slides.pdf` once exported — see manual steps below.
+[View Presentation](presentation/slides.pptx) — `NEXORA_AI_U1_Problem_Statement.pptx` (1.37 MB)
 
 ---
 

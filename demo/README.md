@@ -66,6 +66,4 @@ Leaflet map of India with all grid assets plotted as colour-coded pins (🟢 Low
 
 ## Presentation
 
-See [`../presentation/slides-outline.md`](../presentation/slides-outline.md) for the 9-slide deck outline.
-
-> **Note:** Add `presentation/slides.pdf` or `presentation/slides.pptx` — the `M:\Nexora PPT` folder was empty at submission time. Export your deck and drop the file into `presentation/` then re-commit.
+**[View Presentation](../presentation/slides.pptx)** — `NEXORA_AI_U1_Problem_Statement.pptx` (1.37 MB)
