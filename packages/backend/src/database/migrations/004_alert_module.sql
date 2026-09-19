@@ -752,3 +752,18 @@ VALUES
    'Worker {{workerName}} reported the location for Alert {{alertNumber}} is inaccessible.',
    TRUE)
 ON CONFLICT (event_key) DO NOTHING;
+
+-- ── IBM Bob / watsonx.ai triage cache ─────────────────────────
+
+CREATE TABLE IF NOT EXISTS bob_triage_cache (
+  id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  alert_id            UUID NOT NULL REFERENCES alerts(id) ON DELETE CASCADE,
+  content_hash        VARCHAR(16) NOT NULL,
+  summary             TEXT NOT NULL,
+  recommended_action  TEXT NOT NULL,
+  urgency_level       VARCHAR(20) NOT NULL CHECK (urgency_level IN ('low','moderate','high','critical')),
+  powered_by          VARCHAR(60) NOT NULL DEFAULT 'rule-based-fallback',
+  created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_bob_triage_alert ON bob_triage_cache(alert_id, created_at DESC);

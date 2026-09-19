@@ -1,0 +1,152 @@
+name: Validate Submission
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Hackathon Submission Structure
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check submission.yaml exists and is non-empty
+        run: |
+          if [ ! -f "submission.yaml" ]; then
+            echo "❌ submission.yaml not found"
+            exit 1
+          fi
+          if [ ! -s "submission.yaml" ]; then
+            echo "❌ submission.yaml is empty"
+            exit 1
+          fi
+          echo "✅ submission.yaml exists and is non-empty"
+
+      - name: Validate submission.yaml required fields
+        run: |
+          python3 - <<'EOF'
+          import yaml, sys
+
+          with open("submission.yaml") as f:
+              data = yaml.safe_load(f)
+
+          errors = []
+
+          # Team fields
+          team = data.get("team", {})
+          if not team.get("name", "").strip():
+              errors.append("team.name is blank")
+
+          # Submission fields
+          sub = data.get("submission", {})
+          for field in ["title", "problem_statement", "solution_summary"]:
+              val = sub.get(field, "")
+              if not str(val).strip():
+                  errors.append(f"submission.{field} is blank")
+
+          for list_field in ["key_features", "known_limitations"]:
+              val = sub.get(list_field, [])
+              if not val or len(val) == 0:
+                  errors.append(f"submission.{list_field} is empty")
+
+          if errors:
+              print("❌ submission.yaml validation failed:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+          else:
+              print("✅ submission.yaml fields validated")
+          EOF
+
+      - name: Check required files exist
+        run: |
+          MISSING=0
+          FILES=(
+            "README.md"
+            "CONTRIBUTING.md"
+            ".gitignore"
+            "submission.yaml"
+            "docs/problem-statement.md"
+            "docs/solution-overview.md"
+            "docs/architecture.md"
+            "docs/setup-guide.md"
+            "demo/demo-video-link.txt"
+            "demo/live-demo-url.txt"
+            "demo/README.md"
+            "demo/screenshots/README.md"
+            "presentation/slides-outline.md"
+            "src/README.md"
+          )
+          for f in "${FILES[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Missing required file: $f"
+              MISSING=1
+            else
+              echo "✅ $f"
+            fi
+          done
+          if [ $MISSING -ne 0 ]; then exit 1; fi
+
+      - name: Check source code exists
+        run: |
+          DIRS=(
+            "packages/backend/src"
+            "packages/frontend/src"
+            "packages/shared/src"
+          )
+          for d in "${DIRS[@]}"; do
+            if [ ! -d "$d" ]; then
+              echo "❌ Missing source directory: $d"
+              exit 1
+            fi
+            echo "✅ $d"
+          done
+
+      - name: Check .env not committed
+        run: |
+          if [ -f ".env" ]; then
+            echo "❌ .env file is committed — this must not contain secrets"
+            exit 1
+          fi
+          echo "✅ .env not committed"
+
+      - name: Check for placeholder text in README
+        run: |
+          if grep -q '\[Your ' README.md 2>/dev/null; then
+            echo "❌ README.md contains unfilled placeholders like '[Your ...]'"
+            exit 1
+          fi
+          if grep -q 'PLACEHOLDER' README.md 2>/dev/null; then
+            echo "❌ README.md contains PLACEHOLDER text"
+            exit 1
+          fi
+          echo "✅ No obvious placeholders found in README.md"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build — verify zero TypeScript errors
+        run: npm run build
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "══════════════════════════════════════════"
+          echo "  ✅ NEXORA AI — Submission Validation OK"
+          echo "══════════════════════════════════════════"
+          echo ""
+          echo "All required files present"
+          echo "submission.yaml valid and complete"
+          echo "No .env secrets committed"
+          echo "TypeScript build: zero errors"

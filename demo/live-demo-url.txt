@@ -1,0 +1,14 @@
+NOT DEPLOYED
+
+To run locally, follow docs/setup-guide.md:
+  1. docker compose up -d
+  2. npm install
+  3. cp .env.example .env  (set JWT_SECRET)
+  4. npm run migrate && npm run seed && npm run seed:demo
+  5. npm run dev
+  6. Open http://localhost:3000
+
+Demo accounts:
+  Super Admin:    superadmin@nexora.ai   / Admin@1234!
+  State Admin GJ: admin.gj@nexora.ai    / GjAdmin@123!
+  Worker (GJ):    arjun.patel@nexora.ai / Worker@1234!

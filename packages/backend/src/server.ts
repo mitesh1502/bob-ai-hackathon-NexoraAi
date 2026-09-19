@@ -26,6 +26,7 @@ import { citizenRouter } from './routes/citizens';
 import { alertRouter } from './routes/alerts';
 import { imageRouter } from './routes/images';
 import { measurementRouter } from './routes/measurements';
+import { bobRouter } from './routes/bob';
 
 const app = express();
 
@@ -90,6 +91,7 @@ app.use('/api/reports', reportRouter);
 app.use('/api/alerts', alertRouter);
 app.use('/api/images', imageRouter);
 app.use('/api/measurements', measurementRouter);
+app.use('/api/bob', bobRouter);
 // Note: weatherRouter and sensorRouter are both exported from routes/sensors.ts
 
 // ── Error handler ─────────────────────────────────────────────

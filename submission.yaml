@@ -1,43 +1,74 @@
 team:
-  name: "NEXORA AI Team"
-  members: []
+  name: "NEXORA AI"
+  track: "U1 — Utilities: Power Grid Asset Health & Outage Prevention"
+  lead:
+    name: "Mitesh Patel"
+    github: "mitesh1502"
+    email: "mitesh@nexora-ai.in"
+  members:
+    - name: "Mitesh Patel"
+      role: "Full-Stack Lead — Backend API, Risk Engine, DB Schema"
+      github: "mitesh1502"
 
 submission:
-  title: "NEXORA AI — Power Outage Prediction & Grid Equipment Failure Advisor"
+  title: "NEXORA AI — Intelligent Power Grid Alert Management & Predictive Maintenance Platform"
+
   problem_statement: >
-    U1 — Utilities: Build a solution that combines asset health sensor data,
-    weather forecasts, and historical incident records to predict outage-prone areas
-    and at-risk equipment, rank assets by grid impact severity, and generate a
-    prioritised maintenance and crew pre-positioning plan.
+    India's power distribution utilities lose millions per hour during unplanned outages, yet
+    over 70% still operate on rigid calendar-based maintenance schedules that ignore real-time
+    sensor telemetry, live weather forecasts, and asset-level failure history. When a transformer
+    running at 95% load during a monsoon storm fails at 2 AM, field crews are scrambling reactively
+    rather than already pre-positioned. The U1 challenge demands a system that ingests all three
+    signal streams — IoT sensors, weather APIs, historical incidents — produces explainable,
+    ranked risk scores, and drives a proactive maintenance and crew pre-positioning workflow
+    with full audit governance.
+
   solution_summary: >
-    NEXORA AI combines real-time sensor data (voltage, oil temperature, load, vibration),
-    weather forecasts (storm/flood/heatwave alerts), and historical incident records
-    into an explainable 7-factor risk engine. Each prediction cites its top contributing
-    sources by name. Assets are ranked by a combined Risk Score + Grid Impact Severity
-    metric, feeding a Maintenance Priority Queue. A Crew Pre-Positioning screen matches
-    qualified workers to high-risk assets based on location, skill, and weather urgency
-    — with mandatory admin approval before activation.
+    NEXORA AI is a full-stack TypeScript + PostgreSQL platform that processes real-time sensor
+    readings (voltage, oil temperature, load, vibration, humidity), district-level weather alerts
+    (storm, flood, heatwave, lightning), and per-asset historical incident records through a
+    7-factor explainable risk engine (model v1.0.0) that scores every grid asset 0–100 with named
+    contributing factors. An 11-step Alert Risk Pipeline (model v2.0.0) handles citizen-reported
+    and field-detected incidents end-to-end: creation → 6-tier worker assignment → GPS-verified
+    arrival → structured findings → corrective action → admin-approved closure. A Maintenance
+    Priority Queue ranks assets by risk × grid-impact × failure-probability. A Crew Pre-Positioning
+    screen matches qualified workers to high-risk assets in weather-threatened districts.
+    Every prediction, assignment, and admin decision is versioned and audited. IBM Bob (watsonx)
+    is integrated as a triage summarizer: POST /api/bob/triage calls the watsonx.ai chat API
+    to produce a plain-English summary and recommended action for any alert, with graceful
+    fallback to the rule-based engine when credentials are not configured.
 
   key_features:
-    - "Explainable risk scoring: sensor + weather + history contributions shown per-asset"
-    - "Maintenance Priority Queue ranked by risk score × grid impact × weather urgency"
-    - "Crew Pre-Positioning with weather-triggered pre-staging recommendations"
-    - "Full India geographic hierarchy: 36 states/UTs, complete district lists, talukas, villages"
-    - "State-level data isolation: State Admins see only their assigned state's data"
-    - "AI governance: every prediction is versioned, requires admin review, supports override with reason"
-    - "15+ live risk predictions across 6 states (MH, KL, DL, KA, TN, GJ, UP)"
+    - "7-factor explainable risk engine (v1.0.0): sensor + weather + history + age + load + geographic + observations, each factor named with its contribution in the score breakdown"
+    - "11-step Alert Risk Pipeline (v2.0.0): 22-state lifecycle with safety override floor — critical conditions (exposed wiring, fire, structural damage) pin risk ≥75 regardless of positive findings"
+    - "6-tier worker assignment engine: same village → same taluka → nearby taluka/same district → nearby district → in-state capacity fallback → cross-state (Super Admin auth only), with Haversine travel estimates"
+    - "GPS-verified field arrival: mismatch warning at >200m from assigned coordinates, original + corrected coords both preserved, geo-tagged images with EXIF GPS extraction and tamper SHA-256 hash"
+    - "IBM Bob / watsonx triage integration: POST /api/bob/triage summarises any alert in plain English with recommended action, falls back to rule-based summary if API key not configured"
+    - "Maintenance Priority Queue: Priority = risk×0.4 + grid_impact×0.3 + failure_prob×0.2 + urgency×0.1, with admin approve/reject/override (mandatory written reason)"
+    - "State-level data isolation enforced in every DB query: State Admins see only their state; Workers see only their own data; full tamper-evident audit trail on every transition"
+
+  known_limitations:
+    - "watsonx triage requires WATSONX_API_KEY, WATSONX_URL, and WATSONX_PROJECT_ID in .env — falls back to rule-based summary when not configured"
+    - "Weather data uses mock records seeded in the DB; live OpenWeatherMap integration requires WEATHER_API_KEY"
+    - "GIS boundaries are coordinate points only (no PostGIS polygon shapes); full district boundary polygons require manual GeoJSON import"
+    - "File uploads store to local disk by default; IBM Cloud Object Storage requires IBM_COS_* credentials"
+    - "No real-time WebSocket push yet — dashboard data refreshes on poll interval"
+    - "Demo seed covers Gujarat (GJ) end-to-end; other states have partial asset data only"
 
   ibm_bob_integration:
-    - "Deployed on IBM Cloud-ready infrastructure (Node.js + PostgreSQL)"
-    - "Compatible with IBM watsonx AI service adapter"
-    - "Audit trail and explainability aligned with IBM AI Ethics guidelines"
-    - "Role-based access control aligned with IBM Security policy framework"
+    - "POST /api/bob/triage: accepts alert_id, calls watsonx.ai ibm/granite-13b-chat-v2 with a structured prompt containing asset type, risk score, findings, sensor readings, weather — returns plain-English summary + recommended_action + urgency_level"
+    - "GET /api/bob/triage/:alertId: retrieves cached Bob triage result for an alert from the bob_triage_cache table"
+    - "Graceful fallback: when WATSONX_API_KEY is absent, the endpoint calls the rule-based summarizer (same output shape) so the UI always works"
+    - "Frontend integration: AlertDetailPage 'Risk Score' tab shows 'Ask IBM Bob' button that calls the triage endpoint and renders the structured response"
+    - "IBM Cloud Object Storage adapter in storageService.ts: activated by setting STORAGE_PROVIDER=ibm_cos in .env"
+    - "IBM Cloud Foundry and IBM Code Engine deployment manifests in DEPLOYMENT.md"
 
   tech_stack:
-    backend: "Node.js 20, TypeScript, Express, PostgreSQL 15, JWT Auth"
-    frontend: "React 18, TypeScript, Vite, Tailwind CSS, react-query, recharts"
-    database: "PostgreSQL with uuid_generate_v4, full geographic hierarchy"
-    deployment: "Docker-ready, environment-variable configured"
+    backend: "Node.js 20, TypeScript 5.3, Express 4, PostgreSQL 15 + PostGIS, JWT, bcryptjs, multer, zod, winston"
+    frontend: "React 18, TypeScript 5.3, Vite 5, Tailwind CSS 3, react-query, react-hook-form, recharts, leaflet"
+    database: "PostgreSQL 15 with uuid-ossp, pgcrypto; 4 migrations (001–004); 36-state India geographic hierarchy"
+    ai_ml: "Rule-based risk engine (v1.0.0 + v2.0.0); IBM watsonx.ai granite-13b-chat-v2 for alert triage summaries"
+    deployment: "Docker Compose (postgis/postgis:15-3.3 + pgAdmin); IBM Cloud Foundry / Code Engine ready; .env-configured"
 
   demo_accounts:
     super_admin:
@@ -49,6 +80,18 @@ submission:
     state_admin_kl:
       email: "admin.kl@nexora.ai"
       password: "KlAdmin@123!"
+    state_admin_gj:
+      email: "admin.gj@nexora.ai"
+      password: "GjAdmin@123!"
     worker:
       email: "worker.kumar@nexora.ai"
       password: "Worker@1234!"
+    worker_gujarat:
+      email: "arjun.patel@nexora.ai"
+      password: "Worker@1234!"
+
+  demo_alert:
+    id: "ALT-GJ-DEMO-001"
+    description: "End-to-end Gujarat demo: citizen complaint → alert creation → 6-tier worker assignment → GPS arrival → field findings → risk escalation (54→94, safety override) → corrective action → admin approval → risk reduction (94→28) → closed"
+
+  repository: "https://github.com/mitesh1502/bob-ai-hackathon-NexoraAi"
