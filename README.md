@@ -131,9 +131,24 @@ Response:
 
 ## Demo
 
-- **Demo video:** see [`demo/demo-video-link.txt`](demo/demo-video-link.txt)
-- **Live URL:** see [`demo/live-demo-url.txt`](demo/live-demo-url.txt)
-- **Key demo flow:** Gujarat scenario `ALT-GJ-DEMO-001` — complaint → alert → assignment → GPS arrival → findings → risk 54 → 94 (safety override) → corrective action → admin approval → risk 94 → 28 → closed
+### 📹 Demo Video
+
+▶️ **[Watch on YouTube — https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi](https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi)**
+
+**Key demo flow:** Gujarat scenario `ALT-GJ-DEMO-001` — complaint → alert → assignment → GPS arrival → findings → risk 54→94 (safety override) → corrective action → admin approval → risk 94→28 → closed
+
+### 🖼️ Screenshots
+
+| Screen | Preview |
+|--------|---------|
+| Home / Landing Page | ![Home](demo/screenshots/01-home-landing-page.png) |
+| Super Admin Dashboard | ![Dashboard](demo/screenshots/02-super-admin-dashboard.png) |
+| GIS Infrastructure Map | ![GIS Map](demo/screenshots/03-gis-infrastructure-map.png) |
+
+### 📊 Presentation
+
+Slide deck outline: [`presentation/slides-outline.md`](presentation/slides-outline.md)
+> Add `presentation/slides.pdf` once exported — see manual steps below.
 
 ---
 

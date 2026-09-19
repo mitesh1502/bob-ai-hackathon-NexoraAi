@@ -94,4 +94,12 @@ submission:
     id: "ALT-GJ-DEMO-001"
     description: "End-to-end Gujarat demo: citizen complaint → alert creation → 6-tier worker assignment → GPS arrival → field findings → risk escalation (54→94, safety override) → corrective action → admin approval → risk reduction (94→28) → closed"
 
+  demo_video: "https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi"
+  live_demo: "NOT DEPLOYED — run locally via docker compose + npm run dev (see docs/setup-guide.md)"
+  presentation: "presentation/slides-outline.md (slides.pdf to be added manually)"
+  screenshots:
+    - "demo/screenshots/01-home-landing-page.png"
+    - "demo/screenshots/02-super-admin-dashboard.png"
+    - "demo/screenshots/03-gis-infrastructure-map.png"
+
   repository: "https://github.com/mitesh1502/bob-ai-hackathon-NexoraAi"

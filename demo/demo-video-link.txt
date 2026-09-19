@@ -1,12 +1,1 @@
-PASTE_LOOM_OR_YOUTUBE_LINK_HERE
-
-Instructions:
-1. Record a 3–5 minute demo video showing:
-   - Landing page + login as State Admin (Gujarat)
-   - Alert list → open ALT-GJ-DEMO-001
-   - Alert Detail: Overview, Risk Score (with "Ask IBM Bob" button), Assignment, Report Review, Timeline tabs
-   - Login as worker (arjun.patel@nexora.ai) → Worker Alert page → findings + measurements
-   - Maintenance Priority Queue (/admin/maintenance)
-   - GIS Map (/admin/map)
-2. Upload to Loom (loom.com) or YouTube (unlisted)
-3. Replace "PASTE_LOOM_OR_YOUTUBE_LINK_HERE" above with the actual URL
+https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi

@@ -1,40 +1,71 @@
 # Demo — NEXORA AI
 
-This folder contains demo materials for the NEXORA AI hackathon submission.
+## Demo Video
 
-## Files
+▶️ **[Watch on YouTube](https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi)**
 
-| File / Folder | Description |
-|--------------|-------------|
-| `demo-video-link.txt` | Link to the demo walkthrough video (Loom / YouTube) |
-| `live-demo-url.txt` | Live deployment URL (or "NOT DEPLOYED" with local setup instructions) |
-| `screenshots/` | UI screenshots — see README inside |
+`https://youtu.be/eJAelIMv9rU?si=heTYxAt_r3UUx7Xi`
 
-## Screenshots Required
+---
 
-Add these screenshots to the `screenshots/` folder before final submission:
+## Live Demo
 
-| Filename | What to capture |
-|----------|----------------|
-| `01-landing-page.png` | Public landing page |
-| `02-super-admin-dashboard.png` | Super Admin national dashboard with risk heatmap |
-| `03-alert-list.png` | State Admin alert list page (Gujarat) |
-| `04-alert-detail-overview.png` | Alert ALT-GJ-DEMO-001 — Overview tab |
-| `05-alert-risk-score.png` | Alert ALT-GJ-DEMO-001 — Risk Score tab with pipeline breakdown |
-| `06-ibm-bob-triage.png` | "Ask IBM Bob" result panel |
-| `07-worker-alert-page.png` | Worker alert page — findings checklist + measurements |
-| `08-maintenance-queue.png` | Maintenance Priority Queue |
-| `09-gis-map.png` | GIS asset map (Leaflet) |
-| `10-alert-timeline.png` | Alert timeline — all 21 status transitions |
+The application is not publicly deployed. To run it locally:
+
+```bash
+docker compose up -d
+npm install
+cp .env.example .env   # set JWT_SECRET
+npm run migrate && npm run seed && npm run seed:demo
+npm run dev            # backend :4000 + frontend :3000
+```
+
+Open **http://localhost:3000** — see [docs/setup-guide.md](../docs/setup-guide.md) for the full walkthrough.
+
+---
+
+## Screenshots
+
+### 01 — Home / Landing Page
+Public-facing landing page with citizen complaint portal, worker registration, and complaint tracking.
+
+![NEXORA AI Home](screenshots/01-home-landing-page.png)
+
+---
+
+### 02 — Super Admin Dashboard
+National view: KPI cards (15 assets, 1 critical risk), active weather alerts across states (Surat Flood, South Delhi Storm, Chennai Extreme Weather), Asset Risk Distribution chart, and State Risk Summary table.
+
+![Super Admin Dashboard](screenshots/02-super-admin-dashboard.png)
+
+---
+
+### 03 — GIS Infrastructure Map
+Leaflet map of India with all grid assets plotted as colour-coded pins (🟢 Low / 🟡 Moderate / 🟠 High / 🔴 Critical). State, district, risk level, and asset type filters. Asset + complaint layers togglable.
+
+![GIS Infrastructure Map](screenshots/03-gis-infrastructure-map.png)
+
+---
 
 ## Demo Flow (5-minute walkthrough)
 
-1. **Landing page** (30s) — citizen complaint portal, worker registration
-2. **State Admin login** as `admin.gj@nexora.ai` (30s)
-3. **Alert list** → open `ALT-GJ-DEMO-001` (30s)
-4. **Alert Detail — Overview tab** (30s) — asset, location, risk badge
-5. **Risk Score tab** (60s) — pipeline breakdown, history chart, "Ask IBM Bob"
-6. **Assignment tab** (30s) — 6-tier recommendations with scoring reasons
-7. **Worker login** as `arjun.patel@nexora.ai` (30s)
-8. **Worker Alert page** (60s) — findings checklist, measurements with out-of-range warning, geo-tagged image upload
-9. **Maintenance Queue** + **GIS Map** (30s)
+| # | Step | Account | URL |
+|---|------|---------|-----|
+| 1 | Landing page — public portal | — | `/` |
+| 2 | Login as State Admin (Gujarat) | `admin.gj@nexora.ai` / `GjAdmin@123!` | `/login` |
+| 3 | Alert list — ALT-GJ-DEMO-001 | State Admin | `/state/alerts` |
+| 4 | Alert detail — Overview tab | State Admin | `/state/alerts/:id` |
+| 5 | Alert detail — Risk Score tab + "Ask IBM Bob" | State Admin | `/state/alerts/:id` |
+| 6 | Alert detail — Assignment tab | State Admin | `/state/alerts/:id` |
+| 7 | Login as Field Worker (Gujarat) | `arjun.patel@nexora.ai` / `Worker@1234!` | `/login` |
+| 8 | Worker alert — findings + measurements + geo-images | Worker | `/worker/alerts/:id` |
+| 9 | Super Admin dashboard + GIS map | `superadmin@nexora.ai` / `Admin@1234!` | `/admin/dashboard`, `/admin/map` |
+| 10 | Maintenance priority queue | Super Admin | `/admin/maintenance` |
+
+---
+
+## Presentation
+
+See [`../presentation/slides-outline.md`](../presentation/slides-outline.md) for the 9-slide deck outline.
+
+> **Note:** Add `presentation/slides.pdf` or `presentation/slides.pptx` — the `M:\Nexora PPT` folder was empty at submission time. Export your deck and drop the file into `presentation/` then re-commit.
