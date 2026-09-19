@@ -1,0 +1,25 @@
+{
+  "name": "nexora-ai",
+  "version": "1.0.0",
+  "description": "NEXORA AI — Intelligent Asset Health, Predictive Maintenance, Workforce, and Citizen Complaint Management Platform",
+  "private": true,
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend",
+    "packages/analytics",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "dev:frontend": "npm run dev --workspace=packages/frontend",
+    "dev:analytics": "npm run dev --workspace=packages/analytics",
+    "build": "npm run build --workspaces",
+    "migrate": "npm run migrate --workspace=packages/backend",
+    "seed": "npm run seed --workspace=packages/backend",
+    "test": "npm run test --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,54 @@
+team:
+  name: "NEXORA AI Team"
+  members: []
+
+submission:
+  title: "NEXORA AI — Power Outage Prediction & Grid Equipment Failure Advisor"
+  problem_statement: >
+    U1 — Utilities: Build a solution that combines asset health sensor data,
+    weather forecasts, and historical incident records to predict outage-prone areas
+    and at-risk equipment, rank assets by grid impact severity, and generate a
+    prioritised maintenance and crew pre-positioning plan.
+  solution_summary: >
+    NEXORA AI combines real-time sensor data (voltage, oil temperature, load, vibration),
+    weather forecasts (storm/flood/heatwave alerts), and historical incident records
+    into an explainable 7-factor risk engine. Each prediction cites its top contributing
+    sources by name. Assets are ranked by a combined Risk Score + Grid Impact Severity
+    metric, feeding a Maintenance Priority Queue. A Crew Pre-Positioning screen matches
+    qualified workers to high-risk assets based on location, skill, and weather urgency
+    — with mandatory admin approval before activation.
+
+  key_features:
+    - "Explainable risk scoring: sensor + weather + history contributions shown per-asset"
+    - "Maintenance Priority Queue ranked by risk score × grid impact × weather urgency"
+    - "Crew Pre-Positioning with weather-triggered pre-staging recommendations"
+    - "Full India geographic hierarchy: 36 states/UTs, complete district lists, talukas, villages"
+    - "State-level data isolation: State Admins see only their assigned state's data"
+    - "AI governance: every prediction is versioned, requires admin review, supports override with reason"
+    - "15+ live risk predictions across 6 states (MH, KL, DL, KA, TN, GJ, UP)"
+
+  ibm_bob_integration:
+    - "Deployed on IBM Cloud-ready infrastructure (Node.js + PostgreSQL)"
+    - "Compatible with IBM watsonx AI service adapter"
+    - "Audit trail and explainability aligned with IBM AI Ethics guidelines"
+    - "Role-based access control aligned with IBM Security policy framework"
+
+  tech_stack:
+    backend: "Node.js 20, TypeScript, Express, PostgreSQL 15, JWT Auth"
+    frontend: "React 18, TypeScript, Vite, Tailwind CSS, react-query, recharts"
+    database: "PostgreSQL with uuid_generate_v4, full geographic hierarchy"
+    deployment: "Docker-ready, environment-variable configured"
+
+  demo_accounts:
+    super_admin:
+      email: "superadmin@nexora.ai"
+      password: "Admin@1234!"
+    state_admin_mh:
+      email: "admin.mh@nexora.ai"
+      password: "MhAdmin@123!"
+    state_admin_kl:
+      email: "admin.kl@nexora.ai"
+      password: "KlAdmin@123!"
+    worker:
+      email: "worker.kumar@nexora.ai"
+      password: "Worker@1234!"

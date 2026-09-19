@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+packages/backend/dist/
+packages/frontend/dist/
+packages/shared/dist/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs
+*.log
+backend.log
+frontend.log
+npm-debug.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Vite cache
+.vite/
+packages/frontend/.vite/
+
+# Test coverage
+coverage/
+
+# Misc
+*.pem
+.bob/
+tmp/
+install-hero-image.js

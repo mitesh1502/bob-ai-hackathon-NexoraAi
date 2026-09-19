@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── NEXORA AI brand palette (hero image: dusk / teal grid / amber glow) ── */
+    --color-primary:       #1E3A4C;
+    --color-primary-dark:  #0E1E29;
+    --color-secondary:     #4FB6C4;
+    --color-accent:        #F2A65A;
+    --color-accent-warm:   #E2725B;
+    --color-bg-dark:       #12181F;
+    --color-text-on-dark:  #F4F7F9;
+    --color-text-muted:    #AEBFC9;
+
+    /* Hero image path — update via admin Settings to swap the image */
+    --hero-bg-url: url('/assets/hero-bg.jpg');
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  /* ── Semantic risk colors — DO NOT change, these carry data meaning ── */
+  .risk-low      { @apply text-green-700 bg-green-100; }
+  .risk-moderate { @apply text-yellow-700 bg-yellow-100; }
+  .risk-high     { @apply text-orange-700 bg-orange-100; }
+  .risk-critical { @apply text-red-700 bg-red-100; }
+}
+
+@layer components {
+  /* ── Primary button — dusk-navy, amber hover ring ── */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-dark);
+    @apply font-medium px-4 py-2 rounded-lg transition-colors focus:outline-none;
+    box-shadow: 0 1px 3px rgba(14,30,41,0.35);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+  .btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(242,166,90,0.45);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* ── Secondary / outline button — teal border ── */
+  .btn-secondary {
+    border: 1.5px solid var(--color-secondary);
+    color: var(--color-secondary);
+    @apply bg-transparent font-medium px-4 py-2 rounded-lg transition-colors focus:outline-none;
+  }
+  .btn-secondary:hover {
+    background-color: rgba(79,182,196,0.10);
+  }
+  .btn-secondary:focus {
+    box-shadow: 0 0 0 3px rgba(79,182,196,0.30);
+  }
+
+  /* ── Danger button — unchanged ── */
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg
+           transition-colors focus:ring-4 focus:ring-red-300 focus:outline-none;
+  }
+
+  /* ── Outline button (neutral grey) ── */
+  .btn-outline {
+    @apply border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium px-4 py-2 rounded-lg
+           transition-colors focus:ring-4 focus:ring-gray-200 focus:outline-none;
+  }
+
+  /* ── Card ── */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+  }
+
+  /* ── Form controls — teal focus ring ── */
+  .form-input {
+    @apply block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900
+           focus:outline-none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-input:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 2px rgba(79,182,196,0.20);
+  }
+
+  .form-label {
+    @apply block mb-2 text-sm font-medium text-gray-700;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  /* ── Sidebar nav link ── */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-colors;
+    color: #6b7280;
+  }
+  .sidebar-link:hover {
+    background-color: rgba(79,182,196,0.08);
+    color: var(--color-primary);
+  }
+  .sidebar-link.active {
+    background-color: rgba(30,58,76,0.10);
+    color: var(--color-primary);
+    font-weight: 600;
+    border-left: 3px solid var(--color-accent);
+    padding-left: calc(1rem - 3px);
+  }
+
+  /* ── Hero overlay: dark gradient behind text for legibility ── */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(6,12,20,0.80) 0%,
+      rgba(6,12,20,0.65) 40%,
+      rgba(6,12,20,0.35) 100%
+    );
+  }
+
+  /* ── Text link style (replaces blue-700) ── */
+  .link-primary {
+    color: var(--color-secondary);
+  }
+  .link-primary:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  /* ── Role / user badge ── */
+  .badge-role {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-dark);
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize;
+  }
+
+  /* ── KPI accent number ── */
+  .stat-accent {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+}
