@@ -69,8 +69,8 @@ Copy `.env.example` to `.env` and set these values:
 ### Step 1 — Clone
 
 ```bash
-git clone https://github.com/mitesh1502/bob-ai-hackathon-NexoraAi.git
-cd bob-ai-hackathon-NexoraAi
+git clone https://github.com/mitesh1502/bob-ai-hackathon-civilgrid.git
+cd bob-ai-hackathon-civilgrid
 ```
 
 ### Step 2 — Start PostgreSQL
@@ -160,8 +160,8 @@ psql -U postgres -d nexora_ai -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
 psql -U postgres -d nexora_ai -c "CREATE EXTENSION IF NOT EXISTS postgis;"
 
 # Clone + install
-git clone https://github.com/mitesh1502/bob-ai-hackathon-NexoraAi.git
-cd bob-ai-hackathon-NexoraAi
+git clone https://github.com/mitesh1502/bob-ai-hackathon-civilgrid.git
+cd bob-ai-hackathon-civilgrid
 npm install
 
 # Configure

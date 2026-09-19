@@ -11,7 +11,7 @@
 
 IBM Bob AI Hackathon — Track U1: Utilities
 Team: Mitesh Patel
-GitHub: github.com/mitesh1502/bob-ai-hackathon-NexoraAi
+GitHub: github.com/mitesh1502/bob-ai-hackathon-civilgrid
 
 ---
 
@@ -138,7 +138,7 @@ Key pages:
 ## Slide 9 — Thank You
 
 **NEXORA AI**
-github.com/mitesh1502/bob-ai-hackathon-NexoraAi
+github.com/mitesh1502/bob-ai-hackathon-civilgrid
 
 Contact: mitesh@nexora-ai.in
 

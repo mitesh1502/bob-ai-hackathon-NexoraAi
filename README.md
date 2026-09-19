@@ -57,8 +57,8 @@ NEXORA AI is a full-stack TypeScript + PostgreSQL platform with two interlocking
 ### Option A — Docker (fastest)
 
 ```bash
-git clone https://github.com/mitesh1502/bob-ai-hackathon-NexoraAi.git
-cd bob-ai-hackathon-NexoraAi
+git clone https://github.com/mitesh1502/bob-ai-hackathon-civilgrid.git
+cd bob-ai-hackathon-civilgrid
 
 # 1. Start PostgreSQL
 docker compose up -d
